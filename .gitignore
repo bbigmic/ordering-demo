@@ -6,3 +6,6 @@ __pycache__/
 *.pyd
 *.db
 .env
+.DS_Store
+instance/
+migrations/

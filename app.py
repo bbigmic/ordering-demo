@@ -35,7 +35,6 @@ def generate_qr_code(link):
     img = qr.make_image(fill_color="black", back_color="white")
     return img
 
-
 # Modele bazy danych
 class Table(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -109,11 +108,11 @@ def menu(table_id):
     if table_id < 1 or table_id > total_tables:
         abort(404)  # Zwraca stronę błędu 404, gdy stolik nie istnieje
 
-    # Pobierz `qr_secret` z URL i zweryfikuj dostęp
-    qr_secret = request.args.get('qr_secret')
-    table = Table.query.get(table_id)
-    if not table or table.qr_secret != qr_secret:
-        abort(403)  # Dostęp zabroniony
+    # # Pobierz `qr_secret` z URL i zweryfikuj dostęp
+    # qr_secret = request.args.get('qr_secret')
+    # table = Table.query.get(table_id)
+    # if not table or table.qr_secret != qr_secret:
+    #     abort(403)  # Dostęp zabroniony
 
     # Aktualna godzina w strefie czasowej UTC+1
     timezone = pytz.timezone('Europe/Warsaw')
