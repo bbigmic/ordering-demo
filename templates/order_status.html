@@ -9,11 +9,11 @@
     <h2> Przyjęliśmy Twoje zamówienie </h2>
 
     <div class="action-buttons">
-        <button onclick="callWaiter({{ order.id }})" class="btn">Zawołaj kelnera</button>
+        <button onclick="callWaiter({{ order.id }})" class="btn cta-button">Zawołaj kelnera</button>
     </div>
 
     <div class="bill-request">
-        <button onclick="showPaymentOptions()" class="btn">Poproś rachunek</button>
+        <button onclick="showPaymentOptions()" class="btn cta-button">Poproś rachunek</button>
     </div>
 
  <!-- Sekcja wyboru płatności i innych opcji -->
@@ -46,7 +46,7 @@
             <input type="number" id="custom-tip-input" placeholder="Wpisz kwotę" min="0">
         </div>
 
-        <button onclick="confirmPayment({{ order.id }})" class="btn">Potwierdź</button>
+        <button onclick="confirmPayment({{ order.id }})" class="btn cta-button">Potwierdź</button>
     </div>
 
     <h1 style="margin-top:20px;"> Status zamówienia</h1>

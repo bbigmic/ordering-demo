@@ -5,18 +5,21 @@
     box-sizing: border-box;
 }
 
+
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: #F8F1E5;
+
     line-height: 1.6;
-    background-image: url('/static/images/background.jpg'); /* Ścieżka do obrazu */
+    background-image: url('/static/images/background-wall.png'); /* Ścieżka do obrazu */
     background-size: cover;           /* Obraz rozciąga się na całe tło */
     background-attachment: fixed;     /* Ustawienie pozycji fixed */
     background-position: center;      /* Wyśrodkowanie obrazu */
     background-repeat: no-repeat;     /* Brak powtarzania obrazu */
     position: relative;
     z-index: 1;
+    top: 0 !important; /* Usuń przesunięcie strony */
 }
 
 /* Przyciemnienie obrazu w tle */
@@ -27,7 +30,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8); /* Czarna warstwa z 50% przezroczystością */
+    /* background-color: rgba(0, 0, 0, 0.5); Czarna warstwa z 50% przezroczystością */
     z-index: -1;  /* Umieszczone za innymi elementami */
     pointer-events: none;  /* Zapobiega kliknięciom na przyciemnionej warstwie */
 }
@@ -55,7 +58,7 @@ body::before {
 }
 
 .nav-link:hover {
-    color: #ff9800;
+    color: #F0AD4E;
 }
 
 .content {
@@ -66,7 +69,7 @@ body::before {
 
 h1 {
     font-size: 2rem;
-    color: #333;
+    color: #F8F1E5;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -74,13 +77,15 @@ h1 {
 h2 {
     font-size: 1.5rem;
     margin: 1.5rem 0 1rem;
-    color: #555;
+    color: #F8F1E5;
 }
+
 
 .form {
     background: #fff;
     padding: 1rem;
     margin-bottom: 1rem;
+    border: 1px solid #AAB58B;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
@@ -114,6 +119,8 @@ button {
     color: #fff;
     padding: 10px;
     text-align: center;
+    border-color: #AAB58B; /* Miękka oliwka */
+
 }
 
 #cart h3 {
@@ -144,7 +151,7 @@ button {
     top: 20px;
     left: 62%;
     width: 50%;
-    background-color: #4CAF50;
+    background-color: #E67E22;
     color: white;
     border: none;
     padding: 10px;
@@ -159,7 +166,7 @@ button {
 }
 
 #cart-toggle-btn:hover {
-    background-color: #45a049;
+    background-color: #C7611D;
 }
 
 
@@ -224,7 +231,7 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #4CAF50;
+    background-color: #E67E22;
     color: white;
     cursor: pointer;
     padding: 10px;
@@ -239,7 +246,7 @@ button {
 }
 
 .accordion:hover {
-    background-color: #45a049;
+    background-color: #C7611D;
 }
 
 .arrow {
@@ -265,7 +272,7 @@ button {
 button {
     padding: 5px 10px;
     margin-top: 10px;
-    background-color: #4CAF50;
+    background-color: #E67E22;
     color: white;
     border: none;
     cursor: pointer;
@@ -273,7 +280,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #C7611D;
 }
 
 
@@ -298,12 +305,13 @@ button:hover {
     background-color: #fff;
     padding: 1rem;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid #AAB58B;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    color: #5A3E36;
 }
 
 .menu-item h2 {
@@ -337,6 +345,11 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    color: #5A3E36;
+}
+
+.orders h2 {
+        color: #5A3E36;
 }
 
 .order {
@@ -350,7 +363,7 @@ button:hover {
 
 
 .status-btn {
-    background-color: #4CAF50;
+    background-color: #E67E22;
     color: white;
     padding: 10px 20px;
     margin-top: 10px;
@@ -361,7 +374,7 @@ button:hover {
 }
 
 .status-btn:hover {
-    background-color: #45a049;
+    background-color: #C7611D;
 }
 
 .history-link {
@@ -392,6 +405,9 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.status-container h2 {
+        color: #5A3E36;
+}
 
 
 /* Nagłówek */
@@ -457,7 +473,7 @@ button:hover {
 }
 
 .btn {
-    background-color: #4CAF50;
+    background-color: #E67E22;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -468,7 +484,7 @@ button:hover {
 }
 
 .btn:hover {
-    background-color: #45a049;
+    background-color: #C7611D;
 }
 
 /* Stylizacja paska postępu */
@@ -538,7 +554,7 @@ button:hover {
 }
 
 .review-btn {
-    background-color: #4CAF50;
+    background-color: #E67E22;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -548,7 +564,7 @@ button:hover {
 }
 
 .review-btn:hover {
-    background-color: #45a049;
+    background-color: #C7611D;
 }
 
 

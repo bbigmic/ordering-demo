@@ -5,16 +5,57 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="/static/style.css">
     <title>{% block title %}Aplikacja Restauracyjna{% endblock %}</title>
+    <script type="text/javascript">
+    // Funkcja inicjalizująca Google Translate Widget
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'pl', // Domyślny język strony
+                includedLanguages: 'pl,en,de,fr,es', // Obsługiwane języki
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            },
+            'google_translate_element' // ID kontenera, w którym ma być osadzony widget
+        );
+    }
+
+    // Obsługa wyboru języka z własnego dropdown
+    document.addEventListener("DOMContentLoaded", function () {
+        const languageSelector = document.getElementById("language_selector");
+
+        if (languageSelector) {
+            languageSelector.addEventListener("change", function () {
+                const lang = this.value; // Pobierz wybrany język
+                const translateDropdown = document.querySelector("#google_translate_element select");
+
+                if (translateDropdown) {
+                    translateDropdown.value = lang; // Ustaw wartość w dropdownie Google Translate
+                    translateDropdown.dispatchEvent(new Event("change")); // Wywołaj zmianę języka
+                } else {
+                    console.error("Google Translate widget not found!");
+                }
+            });
+        } else {
+            console.error("Language selector element not found!");
+        }
+    });
+
+
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
+
     <!-- Pasek Nawigacyjny -->
     {% if not request.path.startswith('/menu') and not request.path.startswith('/order_status') %}
+
     <nav class="navbar">
+
         <div class="navbar-container">
             <a href="/menu/1" class="nav-link">Menu</a>
             <a href="/waiter_view" class="nav-link">Widok Kelnera</a>
             <a href="/kitchen_view" class="nav-link">Widok Kuchni</a>
             <a href="/admin" class="nav-link">Panel Administratora</a>
+            <div id="google_translate_element" class="google-translate-element"></div>
         </div>
     </nav>
     {% endif %}
