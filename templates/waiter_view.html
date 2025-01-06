@@ -12,13 +12,13 @@
         <div class="order" id="order-{{ order.id }}">
             <h2>Zamówienie nr {{ order.order_number }} - Stolik nr {{ order.table_id }}</h2>
             <p>Status: {{ order.status }} <a> id: {{ order.id }}</a></p>
-            <p>Łączna cena: {{ order.total_price }} PLN</p>
+            <p>Łączna cena: {{ order.total_price }} EUR</p>
             <p>Godzina zamówienia: {{ order.created_at.strftime("%H:%M") }}</p>
             <h3>Szczegóły zamówienia:</h3>
             <ul>
                 {% for item in order.order_items %}
                     <li>
-                        {{ item.menu_item.name }} - Ilość: {{ item.quantity }} - Cena: {{ item.menu_item.price }} PLN
+                        {{ item.menu_item.name }} - Ilość: {{ item.quantity }} - Cena: {{ item.menu_item.price }} EUR
                         {% if item.customization %}
                             <br><em>Personalizacja: {{ item.customization }}</em>
                         {% endif %}
@@ -84,7 +84,7 @@
                         ? `Zamówienie nr ${call.order_number}: Wezwanie do stolika nr ${call.table_id} <br> Czas wezwania: ${call.call_time}`
                         : `Zamówienie nr ${call.order_number}: Prośba o rachunek do stolika nr ${call.table_id} <br>
                            <strong>Płatność:</strong> ${call.payment_method || "Nie podano"} <br>
-                           <strong>Napiwek:</strong> ${"+"+call.tip+" PLN" || "0 PLN"} <br>
+                           <strong>Napiwek:</strong> ${"+"+call.tip+" EUR" || "0 EUR"} <br>
                            ${call.nip ? `<strong>NIP:</strong> ${call.nip}` : ""} <br>
                            Czas wezwania: ${call.call_time}`;
 
@@ -135,13 +135,13 @@ function updateOrders() {
                     orderDiv.innerHTML = `
                         <h2>Zamówienie nr ${order.order_number} - Stolik nr ${order.table_id}</h2>
                         <p>Status: ${order.status} <a> id: ${order.order_id}</a></p>
-                        <p>Łączna cena: ${order.total_price} PLN</p>
+                        <p>Łączna cena: ${order.total_price} EUR</p>
                         <p>Godzina zamówienia: ${order.order_time}</p>
                         <h3>Szczegóły zamówienia:</h3>
                         <ul>
                             ${order.items.map(item => `
                                 <li>
-                                    ${item.name} - Ilość: ${item.quantity} - Cena: ${item.price} PLN
+                                    ${item.name} - Ilość: ${item.quantity} - Cena: ${item.price} EUR
                                     ${item.takeaway ? `<strong>[Na wynos]</strong>` : ""}
                                     ${item.customization ? `<br><em>Personalizacja: ${item.customization}</em>` : ""} <hr>
                                 </li>

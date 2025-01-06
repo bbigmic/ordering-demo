@@ -36,9 +36,9 @@
 
         <h3>Wybierz napiwek</h3>
         <div>
-            <label><input type="radio" name="tip" value="0" checked> 0 PLN</label>
-            <label><input type="radio" name="tip" value="5"> 5 PLN</label>
-            <label><input type="radio" name="tip" value="15"> 15 PLN</label>
+            <label><input type="radio" name="tip" value="0" checked> 0 EUR</label>
+            <label><input type="radio" name="tip" value="5"> 5 EUR</label>
+            <label><input type="radio" name="tip" value="15"> 15 EUR</label>
             <label><input type="radio" name="tip" value="custom" onchange="toggleCustomTip()"> Inna kwota</label>
         </div>
         <div id="custom-tip-field" style="display: none; margin-top: 10px;">
@@ -66,9 +66,9 @@
     <ul>
         {% for item in order.order_items %}
             <li>
-                {{ item.menu_item.name }} - Cena: {{ item.menu_item.price }} PLN - Ilość: {{ item.quantity }} 
+                {{ item.menu_item.name }} - Cena: {{ item.menu_item.price }} EUR - Ilość: {{ item.quantity }} 
                 {% if item.takeaway %}
-                    <br>[Na wynos] + 2.35 PLN
+                    <br>[Na wynos] + 2.35 EUR
                 {% endif %}
                 {% if item.customization %}
                     <br><em>Personalizacja: {{ item.customization }}</em>
@@ -78,7 +78,7 @@
         {% endfor %}
     </ul>
     
-    <p>Łączna cena: <b> {{ "%.2f"|format(order.total_price) }} PLN </b></p>
+    <p>Łączna cena: <b> {{ "%.2f"|format(order.total_price) }} EUR </b></p>
 
     <h2> Życzymy smaczego! </h2>
 

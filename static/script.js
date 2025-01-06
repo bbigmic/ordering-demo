@@ -56,7 +56,7 @@ function updateCart() {
         const takeawayText = item.takeaway ? " (Na wynos)" : "";
         const listItem = document.createElement("li");
         listItem.innerHTML = `
-            ${item.name}${takeawayText} - Ilość: ${item.quantity} x ${item.price.toFixed(2)} PLN = ${item.totalPrice.toFixed(2)} PLN
+            ${item.name}${takeawayText} - Ilość: ${item.quantity} x ${item.price.toFixed(2)} EUR = ${item.totalPrice.toFixed(2)} EUR
             ${item.customization ? `<br><em style="color:#808080;">Personalizacja: ${item.customization}</em>` : ""}
             <button onclick="removeFromCart(${item.id}, '${item.customization}')" class="remove-btn">Usuń</button>
         `;
@@ -64,7 +64,7 @@ function updateCart() {
     });
 
     // Aktualizacja łącznej ceny na przycisku koszyka
-    document.getElementById("cart-toggle-btn").innerHTML = `Pokaż Koszyk<br><span>${total.toFixed(2)} PLN 🛒</span>`;
+    document.getElementById("cart-toggle-btn").innerHTML = `Pokaż Koszyk<br><span>${total.toFixed(2)} EUR 🛒</span>`;
 
     document.getElementById("cart-total").innerText = total.toFixed(2);
 }
@@ -99,9 +99,9 @@ function toggleCart() {
 
     const toggleBtn = document.getElementById("cart-toggle-btn");
     if (cart.classList.contains("show")) {
-        toggleBtn.innerHTML = `Ukryj Koszyk<br><span>${total.toFixed(2)} PLN 🛒</span>`;
+        toggleBtn.innerHTML = `Ukryj Koszyk<br><span>${total.toFixed(2)} EUR 🛒</span>`;
     } else {
-        toggleBtn.innerHTML = `Pokaż Koszyk<br><span>${total.toFixed(2)} PLN 🛒</span>`;
+        toggleBtn.innerHTML = `Pokaż Koszyk<br><span>${total.toFixed(2)} EUR 🛒</span>`;
     }
 }
 

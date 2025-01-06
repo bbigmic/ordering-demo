@@ -9,7 +9,7 @@
 <!-- Przycisk do rozwijania koszyka -->
 <button onclick="toggleCart()" id="cart-toggle-btn">
     Pokaż Koszyk
-    <span id="cart-total-price" style="display: block; left: 20px;">0 PLN 🛒</span>
+    <span id="cart-total-price" style="display: block; left: 20px;">0 EUR 🛒</span>
 </button>
 
 <h1>Menu</h1>
@@ -31,7 +31,7 @@
                     {% endif %}
                     <h3>{{ item.name }}</h3>
                     <p>{{ item.description }}</p>
-                    <p>Cena: {{ item.price }} PLN</p>
+                    <p>Cena: {{ item.price }} EUR</p>
                     {% if item.contains_alcohol %}
                         <p class="warning">* Zawiera alkohol</p>
                         <label for="age-confirm-{{ item.id }}"><input type="checkbox" id="age-confirm-{{ item.id }}"> Oświadczam, że mam 18 lat:</label>
@@ -42,7 +42,7 @@
                         <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
                     {% endif %}
                     <label>
-                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
+                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 EUR)
                     </label>
                     <button id="add-to-cart-{{ item.id }}" class="btn cta-button" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
                 </div>
@@ -67,7 +67,7 @@
                     {% endif %}
                     <h3>{{ item.name }}</h3>
                     <p>{{ item.description }}</p>
-                    <p>Cena: {{ item.price }} PLN</p>
+                    <p>Cena: {{ item.price }} EUR</p>
                     {% if item.contains_alcohol %}
                         <p class="warning">* Zawiera alkohol</p>
                         <label for="age-confirm-{{ item.id }}"><input type="checkbox" id="age-confirm-{{ item.id }}"> Oświadczam, że mam 18 lat:</label>
@@ -78,7 +78,7 @@
                         <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
                     {% endif %}
                     <label>
-                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
+                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 EUR)
                     </label>
                     <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
                 </div>
@@ -104,7 +104,7 @@
                         {% endif %}
                         <h3>{{ item.name }}</h3>
                         <p>{{ item.description }}</p>
-                        <p>Cena: {{ item.price }} PLN</p>
+                        <p>Cena: {{ item.price }} EUR</p>
                         {% if item.contains_alcohol %}
                             <p class="warning">* Zawiera alkohol</p>
                             <label for="age-confirm-{{ item.id }}"><input type="checkbox" id="age-confirm-{{ item.id }}"> Oświadczam, że mam 18 lat:</label>
@@ -115,7 +115,7 @@
                             <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
                         {% endif %}
                         <label>
-                            <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
+                            <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 EUR)
                         </label>
                         <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
                     </div>
@@ -132,7 +132,7 @@
     </div>
     <ul id="cart-items"></ul>
     <div class="cart-footer">
-        <p>Suma: <span id="cart-total">0</span> PLN</p>
+        <p>Suma: <span id="cart-total">0</span> EUR</p>
         <button onclick="submitOrder()">Zamów</button>
     </div>
 </div>
