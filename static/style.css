@@ -35,7 +35,16 @@ body::before {
     pointer-events: none;  /* Zapobiega kliknięciom na przyciemnionej warstwie */
 }
 
+.google-translate-element {
+    top:18px;
+    position:absolute;
+    right:20px;
+}
 
+.google-translate-element-menu {
+    top:18px;
+    position:absolute;
+}
 
 .navbar {
     background-color: #333;

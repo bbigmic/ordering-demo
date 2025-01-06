@@ -12,7 +12,9 @@ body {
 }
 
 .google-translate-element {
-    maring-top:50px;
+    top:10px;
+    position:absolute;
+    right:20px;
 }
 
 .tables {
@@ -22,7 +24,7 @@ body {
 }
 
 .table {
-
+    color: #5A3E36;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
