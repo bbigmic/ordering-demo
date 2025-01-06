@@ -50,7 +50,12 @@
     </div>
     
     <label for="image">Zdjęcie:</label>
-    <input type="file" id="image" name="image" accept="image/*"><br>
+    <input type="file" id="image" name="image" accept="image/*" style="display:none;">
+    <div id="drop-area" class="drop-area">
+        Upuść tutaj zdjęcie lub kliknij, aby wybrać
+    </div>
+    <br>
+
     
     <label><input type="checkbox" name="customizable"> Możliwość dodawania uwag do dania </label><br>
 
@@ -99,9 +104,14 @@
                 </select><br>
                 
                 <label for="image">Zmień Zdjęcie:</label>
-                <input type="file" name="image" accept="image/*"><br>
+                <input type="file" id="edit-image" name="image" accept="image/*" style="display:none;">
+                <div id="edit-drop-area" class="drop-area">
+                    Upuść tutaj zdjęcie lub kliknij, aby wybrać
+                </div>
+                <br>
+
                 
-                <label><input type="checkbox" name="customizable" {% if item.customizable %}checked{% endif %}> Możliwość personalizacji</label><br>
+                <label><input type="checkbox" name="customizable" {% if item.customizable %}checked{% endif %}> Możliwość dodawania uwag</label><br>
                 <label><input type="checkbox" name="available" {% if item.available %}checked{% endif %}> Dostępne</label><br>
                 <button type="submit">Zaktualizuj</button>
             </form>
@@ -141,6 +151,58 @@
     }
 
 </script>
+
+<script>
+    const editDropArea = document.getElementById('edit-drop-area');
+    const editFileInput = document.getElementById('edit-image');
+
+    // Otwórz selektor pliku po kliknięciu w obszar
+    editDropArea.addEventListener('click', () => editFileInput.click());
+
+    // Stylizacja podczas przeciągania pliku
+    editDropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        editDropArea.classList.add('dragover');
+    });
+
+    editDropArea.addEventListener('dragleave', () => {
+        editDropArea.classList.remove('dragover');
+    });
+
+    // Obsługa przeciągnięcia i upuszczenia pliku
+    editDropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        editDropArea.classList.remove('dragover');
+
+        const files = e.dataTransfer.files; // Pobierz przeciągnięte pliki
+        if (files.length) {
+            editFileInput.files = files; // Przypisz pliki do ukrytego inputa
+            editDropArea.textContent = `Wybrano plik: ${files[0].name}`;
+        }
+    });
+
+    // Obsługa zmiany pliku (np. po kliknięciu i wybraniu z dysku)
+    editFileInput.addEventListener('change', () => {
+        if (editFileInput.files.length) {
+            editDropArea.textContent = `Wybrano plik: ${editFileInput.files[0].name}`;
+        }
+    });
+
+    // Sprawdzanie przesłanego pliku przed wysłaniem formularza
+    document.querySelectorAll('form').forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            const isEditForm = form.contains(editFileInput);
+            if (isEditForm && !editFileInput.files.length) {
+                e.preventDefault(); // Blokuj przesłanie formularza, jeśli nie wybrano pliku
+                alert('Proszę dodać zdjęcie przed wysłaniem formularza.');
+            }
+        });
+    });
+</script>
+
+
+
+
 
 
 
