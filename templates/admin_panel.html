@@ -49,12 +49,15 @@
         <input type="date" id="display_date" name="display_date">
     </div>
     
-    <label for="image">Zdjęcie:</label>
-    <input type="file" id="image" name="image" accept="image/*" style="display:none;">
-    <div id="drop-area" class="drop-area">
+    <label for="add-image">Zdjęcie (opcjonalne):</label>
+    <input type="file" name="image" class="file-input add-image" accept="image/*" style="display:none;">
+    <div class="drop-area add-drop-area">
         Upuść tutaj zdjęcie lub kliknij, aby wybrać
     </div>
+    <small>Możesz dodać zdjęcie lub pozostawić to pole puste.</small>
     <br>
+
+
 
     
     <label><input type="checkbox" name="customizable"> Możliwość dodawania uwag do dania </label><br>
@@ -103,12 +106,15 @@
                     <option value="Alkohole" {% if item.category == "Alkohole" %}selected{% endif %}>Alkohole</option>
                 </select><br>
                 
-                <label for="image">Zmień Zdjęcie:</label>
-                <input type="file" id="edit-image" name="image" accept="image/*" style="display:none;">
-                <div id="edit-drop-area" class="drop-area">
+                <label for="edit-image">Zmień Zdjęcie (opcjonalne):</label>
+                <input type="file" name="image" class="file-input edit-image" accept="image/*" style="display:none;">
+                <div class="drop-area edit-drop-area">
                     Upuść tutaj zdjęcie lub kliknij, aby wybrać
                 </div>
+                <small>Możesz zmienić zdjęcie lub pozostawić to pole bez zmian.</small>
                 <br>
+
+
 
                 
                 <label><input type="checkbox" name="customizable" {% if item.customizable %}checked{% endif %}> Możliwość dodawania uwag</label><br>
@@ -153,51 +159,44 @@
 </script>
 
 <script>
-    const editDropArea = document.getElementById('edit-drop-area');
-    const editFileInput = document.getElementById('edit-image');
+document.querySelectorAll('.drop-area').forEach((dropArea) => {
+    const fileInput = dropArea.previousElementSibling;
 
-    // Otwórz selektor pliku po kliknięciu w obszar
-    editDropArea.addEventListener('click', () => editFileInput.click());
+    // Obsługa kliknięcia
+    dropArea.addEventListener('click', () => fileInput.click());
 
     // Stylizacja podczas przeciągania pliku
-    editDropArea.addEventListener('dragover', (e) => {
+    dropArea.addEventListener('dragover', (e) => {
         e.preventDefault();
-        editDropArea.classList.add('dragover');
+        dropArea.classList.add('dragover');
     });
 
-    editDropArea.addEventListener('dragleave', () => {
-        editDropArea.classList.remove('dragover');
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('dragover');
     });
 
-    // Obsługa przeciągnięcia i upuszczenia pliku
-    editDropArea.addEventListener('drop', (e) => {
+    // Obsługa przeciągania i upuszczania
+    dropArea.addEventListener('drop', (e) => {
         e.preventDefault();
-        editDropArea.classList.remove('dragover');
+        dropArea.classList.remove('dragover');
 
-        const files = e.dataTransfer.files; // Pobierz przeciągnięte pliki
+        const files = e.dataTransfer.files;
         if (files.length) {
-            editFileInput.files = files; // Przypisz pliki do ukrytego inputa
-            editDropArea.textContent = `Wybrano plik: ${files[0].name}`;
+            fileInput.files = files;
+            dropArea.textContent = `Wybrano plik: ${files[0].name}`;
         }
     });
 
-    // Obsługa zmiany pliku (np. po kliknięciu i wybraniu z dysku)
-    editFileInput.addEventListener('change', () => {
-        if (editFileInput.files.length) {
-            editDropArea.textContent = `Wybrano plik: ${editFileInput.files[0].name}`;
+    // Obsługa zmiany pliku (np. po wybraniu przez selektor)
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length) {
+            dropArea.textContent = `Wybrano plik: ${fileInput.files[0].name}`;
+        } else {
+            dropArea.textContent = 'Upuść tutaj zdjęcie lub kliknij, aby wybrać';
         }
     });
+});
 
-    // Sprawdzanie przesłanego pliku przed wysłaniem formularza
-    document.querySelectorAll('form').forEach((form) => {
-        form.addEventListener('submit', (e) => {
-            const isEditForm = form.contains(editFileInput);
-            if (isEditForm && !editFileInput.files.length) {
-                e.preventDefault(); // Blokuj przesłanie formularza, jeśli nie wybrano pliku
-                alert('Proszę dodać zdjęcie przed wysłaniem formularza.');
-            }
-        });
-    });
 </script>
 
 
