@@ -16,7 +16,7 @@ function addToCart(id, name, basePrice, containsAlcohol) {
     const customization = customizationInput ? customizationInput.value : '';
     const takeaway = takeawayCheckbox ? takeawayCheckbox.checked : false;
 
-    const takeawayFee = takeaway ? 2.35 : 0;
+    const takeawayFee = takeaway ? 1.00 : 0;
     const itemPrice = basePrice + takeawayFee;
 
     // Sprawdzamy, czy pozycja już istnieje w koszyku (z takimi samymi opcjami)
