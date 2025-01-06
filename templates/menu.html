@@ -42,7 +42,7 @@
                         <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
                     {% endif %}
                     <label>
-                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 EUR)
+                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+1 EUR)
                     </label>
                     <button id="add-to-cart-{{ item.id }}" class="btn cta-button" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
                 </div>
@@ -78,7 +78,7 @@
                         <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
                     {% endif %}
                     <label>
-                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 EUR)
+                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+1 EUR)
                     </label>
                     <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
                 </div>
@@ -115,7 +115,7 @@
                             <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
                         {% endif %}
                         <label>
-                            <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 EUR)
+                            <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+1 EUR)
                         </label>
                         <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
                     </div>

@@ -407,7 +407,7 @@ def place_order():
         takeaway = item.get('takeaway', False)
 
         # Obliczamy cenę pojedynczej pozycji, uwzględniając opcję "Na wynos"
-        item_price = menu_item.price + (2.35 if takeaway else 0)
+        item_price = menu_item.price + (1.00 if takeaway else 0)
         item_total = item_price * quantity
 
         # Dodajemy do całkowitej ceny
