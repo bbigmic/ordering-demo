@@ -60,17 +60,15 @@
                         <li class="sidebar-item"><a href="{{ url_for('waiter_view') }}">Widok Kelnera</a></li>
                         <li class="sidebar-item"><a href="{{ url_for('kitchen_view') }}">Widok Kuchni</a></li>
                         <li class="sidebar-item"><a href="http://ordering-deploy.onrender.com/menu/1">Zamawianie</a></li>
-                        <!-- <li class="sidebar-item"><a href="http://ordering-deploy.onrender.com/menu/1">Zamawianie</a></li> -->
-                        <!-- <li class="sidebar-item"><a href="">Rezerwacje stolików</a></li>                 -->
                     </ul>
                 </div>
                 <hr>
                 <div class="admin-ul">
                     <ul>
-                        <li class="sidebar-item"><a href="{{ url_for('admin_panel') }}">Aktualne Menu</a></li>
-                        <li class="sidebar-item"><a href="{{ url_for('add_tables') }}">Stoliki</a></li>
-                        <li class="sidebar-item"><a href="{{ url_for('add_events') }}">Wydarzenia</a></li>
-                        <li class="sidebar-item"><a href="{{ url_for('admin_add_popup') }}">Pop-up</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('admin_panel') }}">Zarządzaj aktualnym menu</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('add_tables') }}">Zarządzaj stolikami</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('add_events') }}">Zarządzaj wydarzeniami</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('admin_add_popup') }}">Zarządzaj Pop-upem</a></li>
                     </ul>
                 </div>
             </div>
@@ -80,6 +78,7 @@
             {% block content %}{% endblock %}
         </div>
     </div>
+
 </body>
 <script>
     function toggleSidebar() {
@@ -98,4 +97,6 @@
         });
     });
 </script>
+
+
 </html>

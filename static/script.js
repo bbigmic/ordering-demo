@@ -104,3 +104,5 @@ function toggleCart() {
         toggleBtn.innerHTML = `Pokaż Koszyk<br><span>${total.toFixed(2)} PLN 🛒</span>`;
     }
 }
+
+

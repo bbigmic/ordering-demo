@@ -1,0 +1,28 @@
+<script type="text/javascript">
+  (function(d, t) {
+    var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    v.onload = function() {
+      if (!document.getElementById('root')) {
+        var root = d.createElement('div');
+        root.id = 'root';
+        // Dodanie odpowiednich stylów dla elementu #root, aby nie wpływał na resztę strony
+        root.style.position = 'fixed';
+        root.style.bottom = '20px';
+        root.style.right = '20px';
+        root.style.zIndex = '9999'; // Zapewnia widoczność nad innymi elementami
+        root.style.width = '300px'; // Możesz dostosować szerokość widgetu
+        root.style.height = '400px'; // Możesz dostosować wysokość widgetu
+        root.style.backgroundColor = 'transparent'; // Widget będzie miał przezroczyste tło
+        d.body.appendChild(root);
+      }
+      if (window.myChatWidget && typeof window.myChatWidget.load === 'function') {
+        window.myChatWidget.load({
+          id: 'd1da10bf-c6e7-46c3-9c81-092f3bfdc3b1',
+        });
+      }
+    };
+    v.src = "https://agentivehub.com/production.bundle.min.js";
+    v.type = "text/javascript";
+    s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
