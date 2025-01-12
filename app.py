@@ -445,6 +445,18 @@ def order_status(order_id):
 
     return render_template('order_status.html', order=order, remaining_seconds=remaining_seconds)
 
+@app.route('/order_status_update/<int:order_id>', methods=['GET'])
+def order_status_update(order_id):
+    order = Order.query.get_or_404(order_id)
+    remaining_seconds = None
+    if order.estimated_completion_time:
+        remaining_time = order.estimated_completion_time - datetime.utcnow()
+        remaining_seconds = max(0, int(remaining_time.total_seconds()))
+
+    return jsonify({
+        'status': order.status,
+        'remaining_seconds': remaining_seconds
+    })
 
 
 

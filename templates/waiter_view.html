@@ -23,7 +23,7 @@
                             <br><em>Personalizacja: {{ item.customization }}</em>
                         {% endif %}
                         {% if item.takeaway %}
-                            <strong>[Na wynos]</strong>
+                            <strong>[Na wynos] +1 EUR</strong>
                         {% endif %}
                     <hr>
                     </li>
@@ -36,7 +36,7 @@
                     <button onclick="acceptOrder({{ order.id }})" class="status-btn">Przyjmij zamówienie</button>
                 {% elif order.status == "Accepted" %}
                     <form action="{{ url_for('update_order_status', order_id=order.id) }}" method="post">
-                        <button type="submit" class="status-btn">Zamówienie zrealizowane</button>
+                        <button type="submit" class="status-btn" style="background-color:#F8F1E5 !important; border: 1px solid #E67E22; /* Szary kolor tła */ color:#5A3E36;">Zamówienie zrealizowane</button>
                     </form>
                 {% endif %}
             </div>
@@ -127,7 +127,7 @@ function updateOrders() {
                     } else if (order.status === "Accepted") {
                         buttonHTML = `
                             <form action="/update_order_status/${order.order_id}" method="post">
-                                <button type="submit" class="status-btn">Zamówienie zrealizowane</button>
+                                <button type="submit" class="status-btn" style="background-color:#F8F1E5 !important; border: 1px solid #E67E22; /* Szary kolor tła */ color:#5A3E36;">Zamówienie zrealizowane</button>
                             </form>
                         `;
                     }
@@ -175,11 +175,10 @@ function acceptOrder(orderId) {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            alert("Zamówienie zostało przyjęte!");
             const actionDiv = document.getElementById(`order-action-${orderId}`);
             actionDiv.innerHTML = `
                 <form action="/update_order_status/${orderId}" method="post">
-                    <button type="submit" class="status-btn">Zamówienie zrealizowane</button>
+                    <button type="submit" class="status-btn" style="background-color:#F8F1E5 !important; border: 1px solid #E67E22; /* Szary kolor tła */ color:#5A3E36;">Zamówienie zrealizowane</button>
                 </form>
             `;
         } else {

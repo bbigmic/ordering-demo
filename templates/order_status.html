@@ -4,7 +4,7 @@
 
 {% block content %}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-<div id="google_translate_element" class="google-translate-element-menu"></div>
+<!-- <div id="google_translate_element" class="google-translate-element-menu"></div> -->
 <div class="status-container">
     <h2> Przyjęliśmy Twoje zamówienie </h2>
 
@@ -53,22 +53,26 @@
     <h4> W trakcie przygotowania. </h4>
     <h4>Numer zamówienia: <h1>{{ order.order_number }}</h1> </h4>
     <h4>Do stolika numer {{ order.table_id }}</h4>
-    {% if remaining_seconds is not none %}
-        <p id="timer" class="timer">
+    <p id="status-message" class="timer">
+        {% if order.status == 'Pending' %}
+            Oczekiwanie na akceptację
+        {% elif remaining_seconds is not none and remaining_seconds > 0 %}
             Przybliżony czas realizacji: <span id="time-remaining">{{ remaining_seconds }}</span>
-        </p>
-        <div id="spinner" class="spinner"></div>
-    {% else %}
-        <p>Status zamówienia: <b>{{ order.status }}</b></p>
-    {% endif %}
+        {% else %}
+            Zamówienie prawie gotowe!
+        {% endif %}
+    </p>
+    <div id="spinner" class="spinner" style="display: {% if order.status == 'Pending' or (remaining_seconds is not none and remaining_seconds > 0) %}block{% else %}none{% endif %};"></div>
+
 
     <h3>Szczegóły zamówienia:</h3>
+
     <ul>
         {% for item in order.order_items %}
             <li>
                 {{ item.menu_item.name }} - Cena: {{ item.menu_item.price }} EUR - Ilość: {{ item.quantity }} 
                 {% if item.takeaway %}
-                    <br>[Na wynos] + 2.35 EUR
+                    <br>[Na wynos] +1 EUR
                 {% endif %}
                 {% if item.customization %}
                     <br><em>Personalizacja: {{ item.customization }}</em>
@@ -94,26 +98,36 @@
 </div>
 
 <script>
-    let remainingTime = {{ remaining_seconds or 0 }};
-    const timerDisplay = document.getElementById("time-remaining");
+    const orderId = {{ order.id }};
+    const statusMessage = document.getElementById("status-message");
+    const timeRemainingElement = document.getElementById("time-remaining");
     const spinner = document.getElementById("spinner");
 
-    function updateTimer() {
-        if (remainingTime <= 0) {
-            timerDisplay.innerText = "Zamówienie gotowe!";
-            spinner.style.display = 'none';
-        } else {
-            const minutes = Math.floor(remainingTime / 60);
-            const seconds = remainingTime % 60;
-            timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            remainingTime--;
-            setTimeout(updateTimer, 1000);
-        }
+    function updateOrderStatus() {
+        fetch(`/order_status_update/${orderId}`)
+            .then(response => response.json())
+            .then(data => {
+                const { status, remaining_seconds } = data;
+
+                if (status === 'Pending') {
+                    statusMessage.innerText = "Oczekiwanie na akceptację";
+                    spinner.style.display = "block";
+                } else if (remaining_seconds > 0) {
+                    const minutes = Math.floor(remaining_seconds / 60);
+                    const seconds = remaining_seconds % 60;
+                    statusMessage.innerHTML = `Przybliżony czas realizacji: <span id="time-remaining">${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>`;
+                    spinner.style.display = "block";
+                } else {
+                    statusMessage.innerText = "Zamówienie prawie gotowe!";
+                    spinner.style.display = "none";
+                }
+            })
+            .catch(error => console.error("Błąd przy aktualizacji statusu zamówienia:", error));
     }
 
-    if (remainingTime > 0) {
-        updateTimer();
-    }
+    // Odświeżaj status co 5 sekund
+    setInterval(updateOrderStatus, 5000);
+
 
 
     // Funkcja wezwania kelnera
